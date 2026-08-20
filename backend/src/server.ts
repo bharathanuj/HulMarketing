@@ -1,8 +1,11 @@
+import dotenv from 'dotenv';
+dotenv.config(); // must run before any other local import — several of them construct
+                  // the DB pool and read OLLAMA_* vars at module-load time.
+
 import express from 'express';
 import cors from 'cors';
 import { createServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
-import dotenv from 'dotenv';
 
 import signalsRouter from './routes/signals';
 import opportunitiesRouter from './routes/opportunities';
