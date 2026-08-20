@@ -13,7 +13,6 @@ dist/
 Thumbs.db
 .vscode/
 .idea/
-.claude/
 
 # scratch files accidentally left in a working dir
 backend/test.pdf
