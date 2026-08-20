@@ -1,0 +1,134 @@
+<h1>Architecture</h1>
+<p class="sub">
+  What PROJECT NEXT is, how a cultural moment becomes a governed campaign, and what runs where. Written for
+  anyone opening this system for the first time, not just engineers.
+</p>
+
+<section class="block">
+  <h2>What this system does</h2>
+  <p>
+    PROJECT NEXT watches for cultural moments (a sports win, a viral trend, a news event) and turns a
+    relevant one into a ready-to-review marketing campaign, in minutes instead of days. A signal comes in,
+    twelve purpose-built AI agents sense it, check it against the brand, draft creative, and check that
+    creative again for safety and voice. A human always makes the final call before anything is
+    published. Nothing skips that approval, regardless of how confident the system is.
+  </p>
+</section>
+
+<section class="block">
+  <h2>System map</h2>
+  <p class="section-sub">Four pieces, each doing one job, talking over plain HTTPS.</p>
+  <div class="sysmap">
+    <div class="sysbox">
+      <div class="sysbox-title">Browser</div>
+      <div class="sysbox-sub">Angular app</div>
+      <div class="sysbox-detail">Hosted on Vercel</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="sysbox">
+      <div class="sysbox-title">API server</div>
+      <div class="sysbox-sub">Express + Socket.IO</div>
+      <div class="sysbox-detail">Hosted on Render</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="sysbox">
+      <div class="sysbox-title">Database</div>
+      <div class="sysbox-sub">PostgreSQL</div>
+      <div class="sysbox-detail">Brands, signals, campaigns, audit log</div>
+    </div>
+  </div>
+  <div class="sysmap sysmap-second">
+    <div class="sysbox wide">
+      <div class="sysbox-title">API server</div>
+      <div class="sysbox-sub">Same Express service</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="sysbox">
+      <div class="sysbox-title">Ollama Cloud</div>
+      <div class="sysbox-sub">Hosted LLMs</div>
+      <div class="sysbox-detail">Reasoning / copy / vision models</div>
+    </div>
+  </div>
+  <p class="caption">
+    The browser never talks to the database or the AI models directly — every request goes through the API
+    server, which is the only place credentials and business rules live.
+  </p>
+</section>
+
+<section class="block">
+  <h2>Tech stack</h2>
+  <div class="stack-grid">
+    <div class="stack-card" *ngFor="let s of stack">
+      <div class="stack-layer">{{ s.layer }}</div>
+      <div class="stack-tech">{{ s.tech }}</div>
+      <div class="stack-detail">{{ s.detail }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>The pipeline: from signal to published campaign</h2>
+  <p class="section-sub">
+    Every signal moves through the same eight stages, run in order by one orchestrator class. Each stage is
+    handled by one or more of the twelve agents; none of them know about the others, they just read and
+    write a shared context object as it passes through.
+  </p>
+  <div class="timeline">
+    <div class="stage" *ngFor="let p of pipeline; let i = index">
+      <div class="stage-num">{{ i + 1 }}</div>
+      <div class="stage-body">
+        <div class="stage-head">
+          <span class="stage-name">{{ p.stage }}</span>
+          <span class="stage-agents">{{ p.agents }}</span>
+          <span class="stage-model">{{ p.model }}</span>
+        </div>
+        <div class="stage-summary">{{ p.summary }}</div>
+        <div class="stage-detail">{{ p.detail }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Autonomy levels — how much the system is trusted to do alone</h2>
+  <p class="section-sub">
+    Every opportunity is assigned one of three levels at the DECIDE stage. This is the system's core
+    safety mechanism: risk, not confidence, decides how much happens without a person.
+  </p>
+  <div class="autonomy-grid">
+    <div class="autonomy-card lvl-green">
+      <div class="autonomy-title">GREEN</div>
+      <div class="autonomy-desc">Low risk, strong brand fit. Runs through creation and governance automatically; still waits for human approval before anything publishes.</div>
+    </div>
+    <div class="autonomy-card lvl-amber">
+      <div class="autonomy-title">AMBER</div>
+      <div class="autonomy-desc">Some uncertainty. Same pipeline as GREEN, but flagged for closer review at the approval stage.</div>
+    </div>
+    <div class="autonomy-card lvl-red">
+      <div class="autonomy-title">RED</div>
+      <div class="autonomy-desc">Too risky to draft automatically. Creative generation is blocked outright in code and the opportunity is routed straight to a specialist.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Where the data lives</h2>
+  <p class="section-sub">One PostgreSQL schema, brand-agnostic — every table below is a row store, not brand-specific code.</p>
+  <div class="table-grid">
+    <div class="table-card" *ngFor="let t of tables">
+      <div class="table-name">{{ t.name }}</div>
+      <div class="table-purpose">{{ t.purpose }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Why it's built this way</h2>
+  <ul class="principles">
+    <li><strong>One agent, one job.</strong> Every agent extends the same base class and only implements its own step. Changing what the Copy Agent does never risks breaking the Brand Guardian.</li>
+    <li><strong>The orchestrator holds no business logic.</strong> It only sequences agents and enforces the risk gates — the "what" lives in the agents, the "when" lives in one place.</li>
+    <li><strong>Brands are data, not code.</strong> Onboarding a new brand means adding rows to <code>brands</code> and <code>brand_knowledge</code>, not deploying new code.</li>
+    <li><strong>One shared AI client.</strong> Every agent that needs a model calls the same OllamaService, so the model, host, and key are configured in exactly one place and can be swapped per role with no restart.</li>
+    <li><strong>A human always signs off.</strong> Approval is a database record the Activation Agent checks for, not a UI convention — there's no code path that publishes without it.</li>
+  </ul>
+</section>

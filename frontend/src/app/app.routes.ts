@@ -10,6 +10,7 @@ import { GovernanceListComponent } from './features/governance-list/governance-l
 import { LearningListComponent } from './features/learning-list/learning-list.component';
 import { DocumentsComponent } from './features/documents/documents.component';
 import { AiModelsComponent } from './features/ai-models/ai-models.component';
+import { ArchitectureComponent } from './features/architecture/architecture.component';
 
 // One route per prototype screen from the blueprint (section 14):
 // Live Pulse -> Opportunity Card -> Campaign Builder -> Brand Guardian -> Launch + Learn
@@ -27,4 +28,5 @@ export const routes: Routes = [
   { path: 'launch/:id', component: LaunchLearnComponent },
   { path: 'documents', component: DocumentsComponent },
   { path: 'models', component: AiModelsComponent },
+  { path: 'architecture', component: ArchitectureComponent },
 ];

@@ -1,0 +1,87 @@
+h1 { margin: 0 0 4px; font-weight: 600; }
+.sub { color: var(--text-muted); margin: 0 0 32px; font-size: 14px; max-width: 760px; line-height: 1.6; }
+
+.block { margin-bottom: 40px; }
+.block h2 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+.block > p:not(.section-sub) { font-size: 14px; line-height: 1.7; max-width: 760px; margin: 10px 0 0; }
+.section-sub { color: var(--text-muted); font-size: 13px; margin: 0 0 16px; }
+.caption { color: var(--text-muted); font-size: 12px; margin: 10px 0 0; max-width: 620px; line-height: 1.6; }
+
+// system map
+.sysmap {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sysmap-second { margin-top: 10px; }
+.sysbox {
+  flex: 1;
+  min-width: 160px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.sysbox.wide { flex: 1.35; }
+.sysbox-title { font-weight: 600; font-size: 14px; }
+.sysbox-sub { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+.sysbox-detail { font-size: 12px; color: var(--accent); margin-top: 6px; }
+.arrow { display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 18px; padding: 0 2px; }
+
+// tech stack
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.stack-layer { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 6px; }
+.stack-tech { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+.stack-detail { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+
+// pipeline timeline
+.timeline { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--border); margin-left: 14px; }
+.stage { display: flex; gap: 16px; padding: 0 0 26px 20px; position: relative; }
+.stage:last-child { padding-bottom: 0; }
+.stage-num {
+  position: absolute;
+  left: -31px;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stage-body { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; }
+.stage-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.stage-name { font-weight: 700; font-size: 14px; letter-spacing: 0.5px; }
+.stage-agents { font-size: 13px; color: var(--text); }
+.stage-model { margin-left: auto; font-size: 11px; color: var(--text-muted); background: var(--accent-tint); padding: 2px 8px; border-radius: 999px; }
+.stage-summary { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.stage-detail { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+// autonomy
+.autonomy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.autonomy-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; border-top-width: 4px; }
+.autonomy-card.lvl-green { border-top-color: var(--success); }
+.autonomy-card.lvl-amber { border-top-color: var(--amber); }
+.autonomy-card.lvl-red { border-top-color: var(--danger); }
+.autonomy-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; letter-spacing: 0.5px; }
+.lvl-green .autonomy-title { color: var(--success); }
+.lvl-amber .autonomy-title { color: var(--amber); }
+.lvl-red .autonomy-title { color: var(--danger); }
+.autonomy-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+// tables
+.table-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.table-name { font-family: monospace; font-size: 13px; font-weight: 700; color: var(--accent-dark); margin-bottom: 6px; }
+.table-purpose { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+// principles
+.principles { margin: 0; padding-left: 20px; max-width: 780px; }
+.principles li { font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+.principles code { background: var(--accent-tint); color: var(--accent-dark); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
