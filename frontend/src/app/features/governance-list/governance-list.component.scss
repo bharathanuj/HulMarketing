@@ -1,0 +1,14 @@
+h1 { margin: 0 0 4px; font-weight: 600; }
+.sub { color: var(--text-muted); margin: 0 0 24px; font-size: 14px; }
+.empty { color: var(--text-muted); font-size: 14px; }
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tbl th { text-align: left; color: var(--text-muted); font-weight: 500; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.tbl .row { cursor: pointer; }
+.tbl .row:hover td { background: var(--accent-tint); }
+
+.pill { padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); }
+.pill.st-cleared { border-color: var(--success); color: var(--success); }
+.pill.st-flagged { border-color: var(--danger); color: var(--danger); }
+.pill.st-pending { border-color: var(--amber); color: var(--amber); }

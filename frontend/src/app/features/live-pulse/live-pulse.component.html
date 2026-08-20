@@ -1,0 +1,75 @@
+<h1>Live Pulse</h1>
+<p class="sub">Signals surviving relevance filtering, across all connected brands.</p>
+
+<div class="sim-panel">
+  <div class="mode-toggle">
+    <button type="button" [class.active]="mode === 'preset'" (click)="mode = 'preset'">Preset scenario</button>
+    <button type="button" [class.active]="mode === 'manual'" (click)="mode = 'manual'">Manual signal</button>
+  </div>
+
+  <div class="fields-row">
+    <div class="field">
+      <label>Brand</label>
+      <select [(ngModel)]="brandId">
+        <option *ngFor="let b of brands" [value]="b.brandId">{{ b.name }}</option>
+      </select>
+    </div>
+
+    <ng-container *ngIf="mode === 'preset'">
+      <div class="field">
+        <label>Signal</label>
+        <select [(ngModel)]="presetIndex">
+          <option *ngFor="let p of presets; let i = index" [value]="i">{{ p.label }}</option>
+        </select>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="mode === 'manual'">
+      <div class="field">
+        <label>Source</label>
+        <select [(ngModel)]="manual.source">
+          <option *ngFor="let s of sources" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+      <div class="field grow">
+        <label>Headline / description</label>
+        <input type="text" [(ngModel)]="manual.headline" placeholder="What's happening?" />
+      </div>
+      <div class="field grow">
+        <label>Entities (comma-separated)</label>
+        <input type="text" [(ngModel)]="manual.entities" placeholder="e.g. Cricket World Cup, Team India" />
+      </div>
+      <div class="field">
+        <label>Geography</label>
+        <input type="text" [(ngModel)]="manual.geography" placeholder="e.g. India" />
+      </div>
+      <div class="field">
+        <label>Velocity (0-25)</label>
+        <input type="number" min="0" max="25" [(ngModel)]="manual.velocityScore" />
+      </div>
+      <div class="field">
+        <label>Confidence (0-1)</label>
+        <input type="number" min="0" max="1" step="0.01" [(ngModel)]="manual.confidence" />
+      </div>
+    </ng-container>
+
+    <button class="submit" (click)="simulate()" [disabled]="!brandId || simulating">
+      {{ simulating ? 'Running SENSE → DECIDE…' : 'Send signal' }}
+    </button>
+  </div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+
+<div *ngIf="loading" class="empty">Connecting to signal stream…</div>
+
+<div *ngIf="!loading && opportunities.length === 0" class="empty">
+  No opportunities yet. Send a signal above to see one appear here.
+</div>
+
+<div class="grid">
+  <a *ngFor="let opp of opportunities" [routerLink]="['/opportunity', opp.opportunityId]" class="card" [class]="levelClass(opp.autonomyLevel)">
+    <div class="score">{{ opp.opportunityScore }}</div>
+    <div class="title">{{ opp.title }}</div>
+    <div class="window">{{ opp.opportunityWindowMinutes }} min window</div>
+  </a>
+</div>

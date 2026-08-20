@@ -1,0 +1,15 @@
+h1 { margin: 0 0 4px; font-weight: 600; }
+.sub { color: var(--text-muted); margin: 0 0 24px; font-size: 14px; }
+.empty { color: var(--text-muted); font-size: 14px; }
+.empty a { color: var(--accent); }
+.assets { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.asset { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.asset.flagged { border-color: var(--danger); }
+.head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+.status { color: var(--success); }
+.flagged .status { color: var(--danger); }
+.notes { font-size: 13px; color: var(--text-muted); }
+.cta {
+  display: inline-block; margin-top: 24px; background: var(--accent); color: #ffffff;
+  font-weight: 600; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-size: 14px;
+}

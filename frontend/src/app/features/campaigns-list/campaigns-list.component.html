@@ -1,0 +1,21 @@
+<h1>Campaigns</h1>
+<p class="sub">Generated creative campaigns, most recent first.</p>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && campaigns.length === 0" class="empty">
+  No campaigns yet. Generate one from an opportunity to see it appear here.
+</div>
+
+<table class="tbl" *ngIf="campaigns.length > 0">
+  <thead>
+    <tr><th>Opportunity</th><th>Big idea</th><th>Headline</th><th>Created</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of campaigns" [routerLink]="['/campaign', c.opportunityId]" class="row">
+      <td>{{ c.opportunityTitle }}</td>
+      <td>{{ c.bigIdea }}</td>
+      <td>{{ c.headline }}</td>
+      <td>{{ c.createdAt | date: 'short' }}</td>
+    </tr>
+  </tbody>
+</table>

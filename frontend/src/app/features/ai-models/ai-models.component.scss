@@ -1,0 +1,64 @@
+h1 { margin: 0 0 4px; font-weight: 600; }
+.sub { color: var(--text-muted); margin: 0 0 24px; font-size: 14px; }
+.empty { color: var(--text-muted); font-size: 14px; }
+
+.add-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 28px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.field.grow { flex: 1; min-width: 160px; }
+.field label { color: var(--text-muted); }
+.field input, .field select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 14px;
+}
+button {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.section-title { font-size: 18px; font-weight: 600; margin: 32px 0 4px; }
+.section-sub { color: var(--text-muted); font-size: 13px; margin: 0 0 16px; }
+
+.role-section { margin-bottom: 28px; }
+.role-section h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin: 0 0 10px; }
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tbl th { text-align: left; color: var(--text-muted); font-weight: 500; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.tbl code { font-size: 13px; color: var(--text-muted); }
+.actions { display: flex; gap: 12px; align-items: center; }
+.link { background: none; border: none; padding: 0; font-size: 13px; color: var(--accent); cursor: pointer; font-weight: 400; }
+.link.danger { color: var(--danger); }
+.pill.active { padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--success); color: var(--success); }
+
+.plugin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.plugin-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.plugin-head { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+.cat-pill {
+  display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--accent); background: var(--accent-tint); padding: 2px 6px; border-radius: 4px; margin-right: 8px;
+}
+.plugin-name { font-weight: 600; font-size: 14px; }
+.plugin-meta { color: var(--text-muted); font-size: 12px; margin-bottom: 8px; }
+.plugin-desc { font-size: 13px; line-height: 1.5; margin: 0 0 8px; }
+.plugin-actions { display: flex; gap: 14px; margin-top: 10px; }

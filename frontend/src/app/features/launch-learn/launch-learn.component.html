@@ -1,0 +1,54 @@
+<next-pipeline-stepper *ngIf="opportunityId" [opportunityId]="opportunityId" current="launch"></next-pipeline-stepper>
+
+<h1>Launch + Learn</h1>
+
+<div class="panel" *ngIf="!approved">
+  <p>Ready for human sign-off. Publishing only happens after this approval is recorded.</p>
+  <div class="field">
+    <label>Reviewer name</label>
+    <input type="text" [(ngModel)]="reviewerName" placeholder="Your name" />
+  </div>
+  <button (click)="approve()" class="approve" [disabled]="!reviewerName || approving">
+    {{ approving ? 'Approving…' : 'Approve & publish' }}
+  </button>
+  <div class="error" *ngIf="approveError">{{ approveError }}</div>
+</div>
+
+<div class="panel" *ngIf="approved">
+  <p class="ready">Publication ready — activation {{ activation?.status | lowercase }}.</p>
+  <p class="channels" *ngIf="activation">Channels: {{ activation.channels.join(', ') }}</p>
+
+  <div class="learn" *ngIf="!outcomeRecorded">
+    <h3>Record outcome</h3>
+    <p class="hint">Feed real (or simulated) performance data back into the Learning Agent.</p>
+    <div class="row">
+      <div class="field">
+        <label>Engagement rate</label>
+        <input type="number" step="0.001" [(ngModel)]="engagementRate" placeholder="0.045" />
+      </div>
+      <div class="field">
+        <label>Sentiment ∆</label>
+        <input type="number" step="0.01" [(ngModel)]="sentimentDelta" placeholder="0.12" />
+      </div>
+      <div class="field">
+        <label>Recommendation accepted</label>
+        <select [(ngModel)]="recommendationAccepted">
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Notes</label>
+      <input type="text" [(ngModel)]="outcomeNotes" placeholder="optional" />
+    </div>
+    <button (click)="recordOutcome()" class="approve" [disabled]="recordingOutcome">
+      {{ recordingOutcome ? 'Recording…' : 'Record outcome' }}
+    </button>
+  </div>
+
+  <div class="learn" *ngIf="outcomeRecorded">
+    <h3>Learning summary</h3>
+    <p>{{ learningSummary }}</p>
+  </div>
+</div>

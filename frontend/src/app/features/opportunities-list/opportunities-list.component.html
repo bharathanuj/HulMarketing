@@ -1,0 +1,22 @@
+<h1>Opportunities</h1>
+<p class="sub">Every scored opportunity across all connected brands.</p>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && opportunities.length === 0" class="empty">
+  No opportunities yet. Run a signal through the pipeline to see it appear here.
+</div>
+
+<table class="tbl" *ngIf="opportunities.length > 0">
+  <thead>
+    <tr><th>Title</th><th>Score</th><th>Autonomy</th><th>Window</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let opp of opportunities" [routerLink]="['/opportunity', opp.opportunityId]" class="row">
+      <td>{{ opp.title }}</td>
+      <td>{{ opp.opportunityScore }}</td>
+      <td><span class="pill" [class]="levelClass(opp.autonomyLevel)">{{ opp.autonomyLevel }}</span></td>
+      <td>{{ opp.opportunityWindowMinutes }} min</td>
+      <td>{{ opp.status }}</td>
+    </tr>
+  </tbody>
+</table>

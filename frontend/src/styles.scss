@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap');
+
+:root {
+  /* HUL brand blue (Medium Electric Blue, #035597) driven palette */
+  --bg: #eef2f7;
+  --surface: #ffffff;
+  --surface-alt: #f4f7fb;
+  --border: #d7e0ea;
+  --text: #14213d;
+  --text-muted: #5b6b7c;
+  --accent: #035597;
+  --accent-dark: #023d6d;
+  --accent-tint: #e6eef7;
+  --success: #1c8a4b;
+  --danger: #c62828;
+  --amber: #b9770e;
+  --header-gradient: linear-gradient(100deg, #023d6d 0%, #035597 45%, #4a3a8c 100%);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}

@@ -1,0 +1,21 @@
+<next-pipeline-stepper *ngIf="opportunityId" [opportunityId]="opportunityId" current="governance"></next-pipeline-stepper>
+
+<h1>Brand Guardian</h1>
+<p class="sub">Every generated asset shows provenance and governance status.</p>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && !campaign" class="empty">
+  No campaign yet for this opportunity — <a [routerLink]="['/opportunity', opportunityId]">generate one first</a>.
+</div>
+
+<div class="assets" *ngIf="campaign as c">
+  <div class="asset" *ngFor="let a of c.assets" [class.flagged]="a.governanceStatus === 'FLAGGED'">
+    <div class="head">
+      <span class="platform">{{ a.platform }}</span>
+      <span class="status">{{ a.governanceStatus }}</span>
+    </div>
+    <div class="notes">{{ a.governanceNotes }}</div>
+  </div>
+</div>
+
+<a *ngIf="campaign" [routerLink]="['/launch', opportunityId]" class="cta">Send for human approval</a>

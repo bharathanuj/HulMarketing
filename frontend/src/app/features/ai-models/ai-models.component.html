@@ -1,0 +1,95 @@
+<h1>AI Models</h1>
+<p class="sub">Every AI capability in the company — pipeline language models, plus plugins, internal wrappers, and tools like Copilot or an internal ChatGPT wrapper.</p>
+
+<div class="add-panel">
+  <div class="field">
+    <label>Category</label>
+    <select [(ngModel)]="category">
+      <option *ngFor="let c of categories" [value]="c.value">{{ c.label }}</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Name</label>
+    <input type="text" [(ngModel)]="name" placeholder="e.g. GitHub Copilot" />
+  </div>
+  <div class="field">
+    <label>Provider</label>
+    <input type="text" [(ngModel)]="provider" placeholder="e.g. GitHub / OpenAI / internal" />
+  </div>
+  <div class="field">
+    <label>{{ category === 'llm' ? 'Model ref' : 'Version / ID' }}</label>
+    <input type="text" [(ngModel)]="modelRef" [placeholder]="category === 'llm' ? 'e.g. gpt-oss:120b' : 'e.g. v1.2, internal build'" />
+  </div>
+  <div class="field" *ngIf="category === 'llm'">
+    <label>Role</label>
+    <select [(ngModel)]="role">
+      <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+    </select>
+  </div>
+  <div class="field" *ngIf="category !== 'llm'">
+    <label>Link</label>
+    <input type="text" [(ngModel)]="link" placeholder="internal wiki / tool URL" />
+  </div>
+  <div class="field grow" *ngIf="category === 'llm'">
+    <label>Notes</label>
+    <input type="text" [(ngModel)]="notes" placeholder="optional" />
+  </div>
+  <div class="field grow" *ngIf="category !== 'llm'">
+    <label>Description</label>
+    <input type="text" [(ngModel)]="description" placeholder="what it's used for" />
+  </div>
+  <button (click)="add()" [disabled]="!name || !modelRef || saving">
+    {{ saving ? 'Adding…' : 'Add' }}
+  </button>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+
+<h2 class="section-title">Language models (pipeline)</h2>
+<p class="section-sub">One active model per role — activating a model changes what the pipeline calls next, no restart needed.</p>
+<div class="role-section" *ngFor="let r of roles">
+  <h3>{{ r }}</h3>
+  <div class="empty" *ngIf="byRole(r).length === 0">No models registered for this role.</div>
+  <table class="tbl" *ngIf="byRole(r).length > 0">
+    <thead>
+      <tr><th>Name</th><th>Provider</th><th>Model ref</th><th>Notes</th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of byRole(r)">
+        <td>{{ m.name }}</td>
+        <td>{{ m.provider }}</td>
+        <td><code>{{ m.modelRef }}</code></td>
+        <td>{{ m.notes }}</td>
+        <td class="actions">
+          <span class="pill active" *ngIf="m.isActive">Active</span>
+          <button class="link" *ngIf="!m.isActive" (click)="activate(m)">Activate</button>
+          <button class="link danger" *ngIf="!m.isActive" (click)="remove(m)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="section-title">Plugins, wrappers &amp; tools</h2>
+<p class="section-sub">Existing AI tools used across the company — reference registry, informational only.</p>
+<div class="empty" *ngIf="pluginsAndTools.length === 0">No plugins, wrappers, or tools registered yet.</div>
+<div class="plugin-grid" *ngIf="pluginsAndTools.length > 0">
+  <div class="plugin-card" *ngFor="let m of pluginsAndTools">
+    <div class="plugin-head">
+      <div>
+        <span class="cat-pill">{{ m.category }}</span>
+        <span class="plugin-name">{{ m.name }}</span>
+      </div>
+      <span class="pill active" *ngIf="m.isActive">In use</span>
+    </div>
+    <div class="plugin-meta">{{ m.provider }} · {{ m.modelRef }}</div>
+    <p class="plugin-desc" *ngIf="m.description">{{ m.description }}</p>
+    <a *ngIf="m.link" [href]="m.link" target="_blank" class="link">{{ m.link }}</a>
+    <div class="plugin-actions">
+      <button class="link" *ngIf="!m.isActive" (click)="activate(m)">Mark in use</button>
+      <button class="link" *ngIf="m.isActive" (click)="deactivate(m)">Mark unused</button>
+      <button class="link danger" (click)="remove(m)">Delete</button>
+    </div>
+  </div>
+</div>

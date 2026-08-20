@@ -1,0 +1,22 @@
+<h1>Learning</h1>
+<p class="sub">Post-activation performance feeding back into the next opportunity score.</p>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && outcomes.length === 0" class="empty">
+  No outcomes recorded yet.
+</div>
+
+<table class="tbl" *ngIf="outcomes.length > 0">
+  <thead>
+    <tr><th>Opportunity</th><th>Engagement</th><th>Sentiment ∆</th><th>Accepted</th><th>Recorded</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let o of outcomes" [routerLink]="['/launch', o.opportunityId]" class="row">
+      <td>{{ o.opportunityTitle }}</td>
+      <td>{{ o.engagementRate }}</td>
+      <td>{{ o.sentimentDelta }}</td>
+      <td>{{ o.recommendationAccepted ? 'Yes' : 'No' }}</td>
+      <td>{{ o.recordedAt | date: 'short' }}</td>
+    </tr>
+  </tbody>
+</table>

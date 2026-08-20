@@ -1,0 +1,22 @@
+<h1>Governance</h1>
+<p class="sub">Brand Guardian clearance status for every generated asset.</p>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && assets.length === 0" class="empty">
+  No assets awaiting governance yet.
+</div>
+
+<table class="tbl" *ngIf="assets.length > 0">
+  <thead>
+    <tr><th>Campaign</th><th>Platform</th><th>Type</th><th>Status</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of assets" [routerLink]="['/guardian', a.opportunityId]" class="row">
+      <td>{{ a.headline }}</td>
+      <td>{{ a.platform }}</td>
+      <td>{{ a.assetType }}</td>
+      <td><span class="pill" [class]="statusClass(a.governanceStatus)">{{ a.governanceStatus }}</span></td>
+      <td>{{ a.governanceNotes }}</td>
+    </tr>
+  </tbody>
+</table>

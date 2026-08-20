@@ -1,0 +1,24 @@
+<next-pipeline-stepper *ngIf="opportunityId" [opportunityId]="opportunityId" current="opportunity"></next-pipeline-stepper>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && !opportunity" class="empty">Opportunity not found.</div>
+
+<ng-container *ngIf="opportunity as opp">
+  <h1>{{ opp.title }}</h1>
+  <p class="sub">Score {{ opp.opportunityScore }}/100 · {{ opp.autonomyLevel }} autonomy · status {{ opp.status }}</p>
+
+  <div class="components">
+    <div class="row" *ngFor="let c of components">
+      <span class="label">{{ c.label }}</span>
+      <div class="bar"><div class="fill" [style.width.%]="(c.score / c.max) * 100"></div></div>
+      <span class="value">{{ c.score }}/{{ c.max }}</span>
+      <span class="reason">{{ c.reason }}</span>
+    </div>
+  </div>
+
+  <button *ngIf="opp.status === 'NEW'" class="cta" (click)="generateCampaign()" [disabled]="generating">
+    {{ generating ? 'Generating…' : 'Generate campaign' }}
+  </button>
+  <a *ngIf="opp.status !== 'NEW'" [routerLink]="['/campaign', opportunityId]" class="cta">View campaign</a>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</ng-container>

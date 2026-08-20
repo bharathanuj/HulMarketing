@@ -1,0 +1,21 @@
+<next-pipeline-stepper *ngIf="opportunityId" [opportunityId]="opportunityId" current="campaign"></next-pipeline-stepper>
+
+<div *ngIf="loading" class="empty">Loading…</div>
+<div *ngIf="!loading && !campaign" class="empty">
+  No campaign yet for this opportunity — <a [routerLink]="['/opportunity', opportunityId]">generate one first</a>.
+</div>
+
+<ng-container *ngIf="campaign as c">
+  <h1>{{ c.bigIdea }}</h1>
+  <p class="sub">{{ c.headline }}</p>
+
+  <div class="variants">
+    <div class="variant" *ngFor="let a of c.assets">
+      <div class="platform">{{ a.platform }} · {{ a.assetType }}</div>
+      <div class="copy">{{ a.content }}</div>
+      <div class="status" [class]="a.governanceStatus.toLowerCase()">{{ a.governanceStatus }}</div>
+    </div>
+  </div>
+
+  <a [routerLink]="['/guardian', opportunityId]" class="cta">View Brand Guardian</a>
+</ng-container>

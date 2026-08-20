@@ -1,0 +1,7 @@
+<nav class="stepper">
+  <a routerLink="/live-pulse" class="step back">&larr; Live Pulse</a>
+  <ng-container *ngFor="let s of steps; let last = last">
+    <a [routerLink]="[s.path, opportunityId]" class="step" [class]="stateOf(s)">{{ s.label }}</a>
+    <span class="divider" *ngIf="!last">&rarr;</span>
+  </ng-container>
+</nav>

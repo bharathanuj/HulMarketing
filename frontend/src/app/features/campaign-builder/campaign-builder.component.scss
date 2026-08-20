@@ -1,0 +1,17 @@
+h1 { margin: 0 0 4px; font-weight: 600; }
+.sub { color: var(--text-muted); margin: 0 0 24px; font-size: 14px; }
+.empty { color: var(--text-muted); font-size: 14px; }
+.empty a { color: var(--accent); }
+.variants { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; align-items: start; }
+.variant { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.platform { font-size: 12px; color: var(--accent); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.copy { font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
+.status { margin-top: 10px; font-size: 12px; font-weight: 600; }
+.status.cleared { color: var(--success); }
+.status.flagged { color: var(--danger); }
+.status.pending { color: var(--amber); }
+.status.revised { color: var(--amber); }
+.cta {
+  display: inline-block; margin-top: 24px; background: var(--accent); color: #ffffff;
+  font-weight: 600; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-size: 14px;
+}
