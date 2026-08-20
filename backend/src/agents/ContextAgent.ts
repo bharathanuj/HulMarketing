@@ -4,6 +4,7 @@ import { PipelineContext } from '../types';
 import { OllamaService } from '../services/OllamaService';
 
 interface EvidencePack {
+  [key: string]: unknown;
   summary: string;
   whoIsInvolved: string[];
   whyTrending: string;

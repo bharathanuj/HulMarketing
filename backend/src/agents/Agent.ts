@@ -13,7 +13,7 @@ export abstract class Agent<TOutput = unknown> {
   /** Which local Ollama model this agent calls, if any. Deterministic agents (e.g. scoring) leave this undefined. */
   abstract readonly model?: string;
 
-  protected constructor(protected readonly ollama: OllamaService) {}
+  constructor(protected readonly ollama: OllamaService) {}
 
   async run(context: PipelineContext): Promise<AgentResult<TOutput>> {
     const start = Date.now();
