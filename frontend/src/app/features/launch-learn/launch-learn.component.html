@@ -15,7 +15,7 @@
 </div>
 
 <div class="panel" *ngIf="approved">
-  <p class="ready">Publication ready — activation {{ activation?.status | lowercase }}.</p>
+  <p class="ready">Publication ready. Activation status: {{ activation?.status | lowercase }}.</p>
   <p class="channels" *ngIf="activation">Channels: {{ activation.channels.join(', ') }}</p>
 
   <div class="learn" *ngIf="!outcomeRecorded">

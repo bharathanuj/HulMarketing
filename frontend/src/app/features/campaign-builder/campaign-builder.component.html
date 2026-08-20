@@ -2,7 +2,7 @@
 
 <div *ngIf="loading" class="empty">Loading…</div>
 <div *ngIf="!loading && !campaign" class="empty">
-  No campaign yet for this opportunity — <a [routerLink]="['/opportunity', opportunityId]">generate one first</a>.
+  No campaign yet for this opportunity. <a [routerLink]="['/opportunity', opportunityId]">Generate one first</a>.
 </div>
 
 <ng-container *ngIf="campaign as c">

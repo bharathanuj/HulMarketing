@@ -1,5 +1,5 @@
 <h1>AI Models</h1>
-<p class="sub">Every AI capability in the company — pipeline language models, plus plugins, internal wrappers, and tools like Copilot or an internal ChatGPT wrapper.</p>
+<p class="sub">Every AI capability in the company: pipeline language models, plus plugins, internal wrappers, and tools like Copilot or an internal ChatGPT wrapper.</p>
 
 <div class="add-panel">
   <div class="field">
@@ -47,7 +47,7 @@
 <div *ngIf="loading" class="empty">Loading…</div>
 
 <h2 class="section-title">Language models (pipeline)</h2>
-<p class="section-sub">One active model per role — activating a model changes what the pipeline calls next, no restart needed.</p>
+<p class="section-sub">One active model per role. Switching it changes what the pipeline calls next, no restart needed.</p>
 <div class="role-section" *ngFor="let r of roles">
   <h3>{{ r }}</h3>
   <div class="empty" *ngIf="byRole(r).length === 0">No models registered for this role.</div>
@@ -72,7 +72,7 @@
 </div>
 
 <h2 class="section-title">Plugins, wrappers &amp; tools</h2>
-<p class="section-sub">Existing AI tools used across the company — reference registry, informational only.</p>
+<p class="section-sub">Existing AI tools used across the company. Reference registry, informational only.</p>
 <div class="empty" *ngIf="pluginsAndTools.length === 0">No plugins, wrappers, or tools registered yet.</div>
 <div class="plugin-grid" *ngIf="pluginsAndTools.length > 0">
   <div class="plugin-card" *ngFor="let m of pluginsAndTools">
